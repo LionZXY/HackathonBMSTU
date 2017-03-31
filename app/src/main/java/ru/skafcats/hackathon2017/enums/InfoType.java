@@ -1,5 +1,7 @@
 package ru.skafcats.hackathon2017.enums;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Nikita Kulikov on 31.03.17.
  * <p>
@@ -24,4 +26,6 @@ public enum InfoType {
                 return type;
         return UNKNOWN;
     }
+
 }
+

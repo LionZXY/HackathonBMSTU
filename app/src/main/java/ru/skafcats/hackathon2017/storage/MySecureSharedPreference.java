@@ -23,15 +23,13 @@ public class MySecureSharedPreference extends SecurePreferences {
     File prefFile = null;
 
     public MySecureSharedPreference(Context context, String password, SecureInfo secureInfo) {
-        super(context, password, String.valueOf(secureInfo.getId()));
-
-        prefFile = new File(context.getFilesDir() + "/shared_prefs/" + String.valueOf(secureInfo.getId()) + ".xml");
+        this(context, password, secureInfo.getId());
     }
 
     public MySecureSharedPreference(Context context, String password, long id) {
         super(context, password, String.valueOf(id));
 
-        prefFile = new File(context.getFilesDir() + "/shared_prefs/" + id + ".xml");
+        prefFile = new File("/data/data/" + context.getPackageName() + "/shared_prefs/" + id + ".xml");
     }
 
     public MySecureSharedPreference(Context context, String password, InfoAboutSecureInfo infoAboutSecureInfo) {
@@ -79,5 +77,10 @@ public class MySecureSharedPreference extends SecurePreferences {
 
     public File toFile() {
         return prefFile;
+    }
+
+    public static File getFile(InfoAboutSecureInfo infoAboutSecureInfo, String packageName) {
+        return new File("/data/data/" + packageName + "/shared_prefs/" + infoAboutSecureInfo.getId() + ".xml");
+
     }
 }

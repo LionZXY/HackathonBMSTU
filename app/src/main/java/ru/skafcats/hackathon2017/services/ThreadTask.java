@@ -7,7 +7,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import ru.skafcats.hackathon2017.interfaces.IExecutor;
 import ru.skafcats.hackathon2017.interfaces.ITask;
-import ru.skafcats.hackathon2017.services.MultiResultReciever;
 
 /**
  * Created by lionzxy on 25.03.17.
@@ -17,6 +16,7 @@ public class ThreadTask extends Thread {
     public static final String TAG = "ThreadTask";
     private MultiResultReciever resultReceiver = null;
     private final CopyOnWriteArrayList<ITask> tasks = new CopyOnWriteArrayList<>();
+    private volatile boolean isRun = false;
 
     ThreadTask(MultiResultReciever resultReceiver) {
         this.resultReceiver = resultReceiver;
@@ -25,6 +25,7 @@ public class ThreadTask extends Thread {
     @Override
     public void run() {
         super.run();
+        isRun = true;
         ITask task = null;
 
         while (tasks.size() > 0 && !isInterrupted()) {
@@ -40,20 +41,8 @@ public class ThreadTask extends Thread {
                 }
             });
         }
-        if (!isInterrupted())
-            try {
-                synchronized (tasks) {
-                    tasks.wait();
-                }
-                if (!isInterrupted())
-                    run();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        synchronized (tasks) {
-            tasks.clear();
-        }
-
+        isRun = false;
+        tasks.clear();
     }
 
     public void addTask(ITask task) {
@@ -64,7 +53,8 @@ public class ThreadTask extends Thread {
                     tasks.remove(task);
                     tasks.add(task);
                 } else tasks.add(task);
-                tasks.notifyAll();
+                if (!isRun && !isAlive())
+                    start();
             }
         }
     }

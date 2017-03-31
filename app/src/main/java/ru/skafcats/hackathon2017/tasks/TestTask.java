@@ -20,16 +20,11 @@ public class TestTask extends ITask {
     public static final String TAG = "TestTask";
 
     public TestTask() {
-        super(TaskType.NETWORK_TASK);
+        super(TaskType.NETWORK_TASK, 0);
     }
 
     public TestTask(Parcel in) {
-        super(TaskType.NETWORK_TASK);
-    }
-
-    @Override
-    public int hashCode() {
-        return 10;
+        super(TaskType.NETWORK_TASK, 0);
     }
 
     @Override

@@ -6,11 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import ru.skafcats.hackathon2017.models.InfoAboutSecureInfo;
+import ru.skafcats.hackathon2017.enums.Constants;
+import ru.skafcats.hackathon2017.interfaces.ITaskAnswerListener;
 import ru.skafcats.hackathon2017.models.SecureInfo;
-import ru.skafcats.hackathon2017.storage.MySecureSharedPreference;
+import ru.skafcats.hackathon2017.services.MultiResultReciever;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ITaskAnswerListener {
     String password = "1234";
     Toolbar mToolbar;
     FragmentManager mFragmentManager;
@@ -19,17 +20,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        mFragmentManager = getSupportFragmentManager();
-        mFragmentManager.beginTransaction().add(R.id.main_fragment, new PasswordListFragment(), PasswordListFragment.TAG).commit();*/
 
-        SecureInfo secureInfo = new SecureInfo("login");
-        secureInfo.addField("some", "some");
-        InfoAboutSecureInfo infoAboutSecureInfo = new InfoAboutSecureInfo(secureInfo);
-        new MySecureSharedPreference(this, password, secureInfo).setSecureInfo(secureInfo);
-        secureInfo = new MySecureSharedPreference(this, password, infoAboutSecureInfo).getSecureInfo();
-        Log.i("TEST", secureInfo.getName());
-        Log.i("TEST", secureInfo.getByKey("some"));
+        CryptoApi cryptoApi = CryptoApi.getInstance(this, "1234");
+        cryptoApi.addInfo(new SecureInfo("test"));
+        Log.i("Test", String.valueOf(cryptoApi.getInfo().get(0).getName()));
+    }
+
+    @Override
+    public void onAnswer(Bundle data) {
+        int code = data.getInt(Constants.KEY_RESULT_CODE, MultiResultReciever.CODE_RESULT_ERROR_TASK);
+        Log.i("TEST", code + ' ' + data.getString(Constants.KEY_RESPONSE));
     }
 }

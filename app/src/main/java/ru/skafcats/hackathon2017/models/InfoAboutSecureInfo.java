@@ -5,7 +5,10 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 import ru.skafcats.hackathon2017.enums.InfoType;
+import ru.skafcats.hackathon2017.enums.RealmEnum;
 
 /**
  * Created by Nikita Kulikov on 31.03.17.
@@ -13,20 +16,53 @@ import ru.skafcats.hackathon2017.enums.InfoType;
  * Возможно полное или частичное копирование
  */
 
-public class InfoAboutSecureInfo implements Serializable, Parcelable {
+public class InfoAboutSecureInfo extends RealmObject implements Serializable, Parcelable {
+    @PrimaryKey
     private long id = -1;
+    private long lastEdit = -1;
     private String name = null;
     private String login = null;
-    private InfoType type = InfoType.UNKNOWN;
-    private ServiceModel serviceModel = null;
+    private RealmEnum type = new RealmEnum().saveEnum(InfoType.UNKNOWN);
+    private String link = null;
 
     public InfoAboutSecureInfo(SecureInfo secureInfo) {
-        name = secureInfo.getName();
-        login = secureInfo.getName();
-        id = secureInfo.getId();
+        this(secureInfo.getId());
+        setName(secureInfo.getName());
+        setLogin(secureInfo.getName());
+        setLastEdit(getId());
         if (secureInfo.getByKey("type") != null)
-            type = InfoType.getKeyFromId(Integer.parseInt(secureInfo.getByKey("type")));
-        serviceModel = new ServiceModel(secureInfo);
+            setType(new RealmEnum().saveEnum(InfoType.getKeyFromId(Integer.parseInt(secureInfo.getByKey("type")))));
+        setLink(secureInfo.getByKey("link"));
+    }
+
+    public InfoAboutSecureInfo(int id) {
+        this.id = id;
+    }
+
+    public InfoAboutSecureInfo() {
+    }
+
+    public InfoAboutSecureInfo setSecureInfo(SecureInfo secureInfo) {
+        setName(secureInfo.getName());
+        setLogin(secureInfo.getByKey("login"));
+        setLastEdit(getId());
+        if (secureInfo.getByKey("type") != null)
+            setType(new RealmEnum().saveEnum(InfoType.getKeyFromId(Integer.parseInt(secureInfo.getByKey("type")))));
+        setLink(secureInfo.getByKey("link"));
+        return this;
+    }
+
+    public InfoAboutSecureInfo setInfo(InfoAboutSecureInfo info) {
+        setName(info.getName());
+        setLogin(info.getLogin());
+        setLastEdit(info.getLastEdit());
+        setType(info.getType());
+        setLink(info.getLink());
+        return this;
+    }
+
+    public InfoAboutSecureInfo(long id) {
+        this.id = id;
     }
 
 
@@ -54,7 +90,7 @@ public class InfoAboutSecureInfo implements Serializable, Parcelable {
         return login;
     }
 
-    public long getId(){
+    public long getId() {
         return id;
     }
 
@@ -62,20 +98,12 @@ public class InfoAboutSecureInfo implements Serializable, Parcelable {
         this.login = login;
     }
 
-    public InfoType getType() {
+    public RealmEnum getType() {
         return type;
     }
 
-    public void setType(InfoType type) {
-        this.type = type;
-    }
-
-    public ServiceModel getServiceModel() {
-        return serviceModel;
-    }
-
-    public void setServiceModel(ServiceModel serviceModel) {
-        this.serviceModel = serviceModel;
+    public void setType(RealmEnum realmEnum) {
+        this.type = realmEnum;
     }
 
     @Override
@@ -87,10 +115,8 @@ public class InfoAboutSecureInfo implements Serializable, Parcelable {
         id = in.readLong();
         name = in.readString();
         login = in.readString();
-        type = InfoType.getKeyFromId(in.readInt());
+        type = new RealmEnum().saveEnum(InfoType.getKeyFromId(in.readInt()));
         Serializable tmp = in.readSerializable();
-        if (tmp instanceof ServiceModel)
-            serviceModel = (ServiceModel) tmp;
     }
 
     @Override
@@ -98,7 +124,22 @@ public class InfoAboutSecureInfo implements Serializable, Parcelable {
         dest.writeLong(id);
         dest.writeString(name);
         dest.writeString(login);
-        dest.writeInt(type.getId());
-        dest.writeSerializable(serviceModel);
+        dest.writeInt(type.getEnum().getId());
+    }
+
+    public long getLastEdit() {
+        return lastEdit;
+    }
+
+    public void setLastEdit(long lastEdit) {
+        this.lastEdit = lastEdit;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 }

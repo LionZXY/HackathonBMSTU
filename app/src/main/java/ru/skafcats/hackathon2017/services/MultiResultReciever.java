@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import ru.skafcats.hackathon2017.enums.Constants;
 import ru.skafcats.hackathon2017.interfaces.ITask;
 import ru.skafcats.hackathon2017.interfaces.ITaskAnswerListener;
 
@@ -32,11 +33,13 @@ public class MultiResultReciever extends ResultReceiver {
     protected void onReceiveResult(int resultCode, Bundle resultData) {
         if (resultData != null) {
             ITask task = resultData.getParcelable("task");
+            resultData.putInt(Constants.KEY_RESULT_CODE, resultCode);
             if (task != null) {
                 List<ITaskAnswerListener> taskAnswerListeners = taskListeners.get(task);
-                for (int i = 0; i < taskAnswerListeners.size(); i++)
-                    if (taskAnswerListeners.get(i) != null)
-                        taskAnswerListeners.get(i).onAnswer(resultData);
+                if (taskAnswerListeners != null)
+                    for (int i = 0; i < taskAnswerListeners.size(); i++)
+                        if (taskAnswerListeners.get(i) != null)
+                            taskAnswerListeners.get(i).onAnswer(resultData);
 
                 if (resultCode == CODE_RESULT_FINISH_TASK || resultCode == CODE_RESULT_ERROR_TASK)
                     taskListeners.remove(task);

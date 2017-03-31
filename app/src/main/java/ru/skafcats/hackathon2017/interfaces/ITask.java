@@ -1,6 +1,5 @@
 package ru.skafcats.hackathon2017.interfaces;
 
-import android.os.Parcel;
 import android.os.Parcelable;
 
 import ru.skafcats.hackathon2017.enums.TaskType;
@@ -11,9 +10,11 @@ import ru.skafcats.hackathon2017.enums.TaskType;
 
 public abstract class ITask implements Parcelable {
     private TaskType taskType = null;
+    private int id = -1;
 
-    public ITask(TaskType taskType) {
+    public ITask(TaskType taskType, int id) {
         this.taskType = taskType;
+        this.id = id;
     }
 
 
@@ -27,10 +28,10 @@ public abstract class ITask implements Parcelable {
     }
 
 
-
-
     @Override
-    public abstract int hashCode();
+    public int hashCode() {
+        return id;
+    }
 
     @Override
     public abstract boolean equals(Object obj);
