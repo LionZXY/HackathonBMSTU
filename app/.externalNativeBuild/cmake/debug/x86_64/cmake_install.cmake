@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/FlameInvader/AndroidStudioProjects/HackathonBMSTU/app
+# Install script for directory: /Users/vasidmi/Desktop/AndroidProjects/HackathonBMSTU/app
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Project")
+  set(CMAKE_INSTALL_PREFIX "/usr/local")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/FlameInvader/AndroidStudioProjects/HackathonBMSTU/app/.externalNativeBuild/cmake/debug/x86_64/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/vasidmi/Desktop/AndroidProjects/HackathonBMSTU/app/.externalNativeBuild/cmake/debug/x86_64/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -1,7 +1,5 @@
 package ru.skafcats.hackathon2017.models;
 
-import java.util.ArrayList;
-
 /**
  * Created by vasidmi on 31/03/2017.
  */
