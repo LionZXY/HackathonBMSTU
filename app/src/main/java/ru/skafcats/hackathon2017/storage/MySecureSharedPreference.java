@@ -7,10 +7,10 @@ import android.support.v4.util.ArraySet;
 import com.securepreferences.SecurePreferences;
 
 import java.io.File;
-import java.util.Map;
 import java.util.Set;
 
 import ru.skafcats.hackathon2017.models.FileObject;
+import ru.skafcats.hackathon2017.models.InfoAboutSecureInfo;
 import ru.skafcats.hackathon2017.models.SecureInfo;
 
 /**
@@ -24,7 +24,18 @@ public class MySecureSharedPreference extends SecurePreferences {
 
     public MySecureSharedPreference(Context context, String password, SecureInfo secureInfo) {
         super(context, password, String.valueOf(secureInfo.getId()));
-        //prefFile = context.getSharedPreferencesPath(String.valueOf(secureInfo.getId()));
+
+        prefFile = new File(context.getFilesDir() + "/shared_prefs/" + String.valueOf(secureInfo.getId()) + ".xml");
+    }
+
+    public MySecureSharedPreference(Context context, String password, long id) {
+        super(context, password, String.valueOf(id));
+
+        prefFile = new File(context.getFilesDir() + "/shared_prefs/" + id + ".xml");
+    }
+
+    public MySecureSharedPreference(Context context, String password, InfoAboutSecureInfo infoAboutSecureInfo) {
+        this(context, password, infoAboutSecureInfo.getId());
     }
 
     @Nullable
@@ -39,13 +50,10 @@ public class MySecureSharedPreference extends SecurePreferences {
                 for (String file : files)
                     secureInfo.addFile(FileObject.getFileObject(file));
             }
-            Map<String, String> map = getAll();
-            map.remove("name");
-            map.remove("key");
-            map.remove("files");
 
-            for (String keyField : map.keySet())
-                secureInfo.addField(keyField, map.get(keyField));
+            for (String keyField : getStringSet("fields", new ArraySet<String>()))
+                if (getString(keyField, null) != null)
+                    secureInfo.addField(keyField, getString(keyField, null));
         }
         return secureInfo;
     }
@@ -60,6 +68,7 @@ public class MySecureSharedPreference extends SecurePreferences {
             for (FileObject file : secureInfo.getFiles())
                 files.add(file.toString());
             editor.putStringSet("files", files);
+            editor.putStringSet("fields", secureInfo.getKeys());
             for (String key : secureInfo.getKeys())
                 editor.putString(key, secureInfo.getByKey(key));
 
