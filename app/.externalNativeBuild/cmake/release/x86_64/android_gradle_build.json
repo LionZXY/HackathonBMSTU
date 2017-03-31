@@ -2,11 +2,11 @@
 {
 	"buildFiles" : 
 	[
-		"/Users/vasidmi/Desktop/AndroidProjects/HackathonBMSTU/app/CMakeLists.txt"
+		"C:/Users/FlameInvader/AndroidStudioProjects/HackathonBMSTU/app/CMakeLists.txt"
 	],
 	"cleanCommands" : 
 	[
-		"/Users/vasidmi/Library/Android/sdk/cmake/3.6.3155560/bin/cmake --build /Users/vasidmi/Desktop/AndroidProjects/HackathonBMSTU/app/.externalNativeBuild/cmake/release/x86_64 --target clean"
+		"C:\\Users\\FlameInvader\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.3155560\\bin\\cmake.exe --build C:\\Users\\FlameInvader\\AndroidStudioProjects\\HackathonBMSTU\\app\\.externalNativeBuild\\cmake\\release\\x86_64 --target clean"
 	],
 	"cppFileExtensions" : [ "cpp" ],
 	"libraries" : 
@@ -15,27 +15,27 @@
 		{
 			"abi" : "x86_64",
 			"artifactName" : "native-lib",
-			"buildCommand" : "/Users/vasidmi/Library/Android/sdk/cmake/3.6.3155560/bin/cmake --build /Users/vasidmi/Desktop/AndroidProjects/HackathonBMSTU/app/.externalNativeBuild/cmake/release/x86_64 --target native-lib",
+			"buildCommand" : "C:\\Users\\FlameInvader\\AppData\\Local\\Android\\Sdk\\cmake\\3.6.3155560\\bin\\cmake.exe --build C:\\Users\\FlameInvader\\AndroidStudioProjects\\HackathonBMSTU\\app\\.externalNativeBuild\\cmake\\release\\x86_64 --target native-lib",
 			"buildType" : "release",
 			"files" : 
 			[
 				
 				{
-					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=/Users/vasidmi/Library/Android/sdk/ndk-bundle/toolchains/x86_64-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/vasidmi/Library/Android/sdk/ndk-bundle/platforms/android-21/arch-x86_64  -Dnative_lib_EXPORTS -isystem /Users/vasidmi/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /Users/vasidmi/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/x86_64/include -isystem /Users/vasidmi/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -std=c++11 -O2 -DNDEBUG -O2 -DNDEBUG  -fPIC    -c ",
-					"src" : "/Users/vasidmi/Desktop/AndroidProjects/HackathonBMSTU/app/src/main/cpp/native-lib.cpp",
-					"workingDirectory" : "/Users/vasidmi/Desktop/AndroidProjects/HackathonBMSTU/app/.externalNativeBuild/cmake/release/x86_64"
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=C:/Users/FlameInvader/AppData/Local/Android/sdk/ndk-bundle/toolchains/x86_64-4.9/prebuilt/windows-x86_64 --sysroot=C:/Users/FlameInvader/AppData/Local/Android/sdk/ndk-bundle/platforms/android-21/arch-x86_64  -Dnative_lib_EXPORTS -isystem C:\\Users\\FlameInvader\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include -isystem C:\\Users\\FlameInvader\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\libs\\x86_64\\include -isystem C:\\Users\\FlameInvader\\AppData\\Local\\Android\\sdk\\ndk-bundle\\sources\\cxx-stl\\gnu-libstdc++\\4.9\\include\\backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -std=c++11 -O2 -DNDEBUG -O2 -DNDEBUG  -fPIC    -c ",
+					"src" : "C:/Users/FlameInvader/AndroidStudioProjects/HackathonBMSTU/app/src/main/cpp/native-lib.cpp",
+					"workingDirectory" : "C:/Users/FlameInvader/AndroidStudioProjects/HackathonBMSTU/app/.externalNativeBuild/cmake/release/x86_64"
 				}
 			],
-			"output" : "/Users/vasidmi/Desktop/AndroidProjects/HackathonBMSTU/app/build/intermediates/cmake/release/obj/x86_64/libnative-lib.so",
-			"toolchain" : "346706704404412566"
+			"output" : "C:/Users/FlameInvader/AndroidStudioProjects/HackathonBMSTU/app/build/intermediates/cmake/release/obj/x86_64/libnative-lib.so",
+			"toolchain" : "1199806853"
 		}
 	},
 	"toolchains" : 
 	{
-		"346706704404412566" : 
+		"1199806853" : 
 		{
-			"cCompilerExecutable" : "/Users/vasidmi/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang",
-			"cppCompilerExecutable" : "/Users/vasidmi/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+			"cCompilerExecutable" : "C:/Users/FlameInvader/AppData/Local/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe",
+			"cppCompilerExecutable" : "C:/Users/FlameInvader/AppData/Local/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe"
 		}
 	}
 }
