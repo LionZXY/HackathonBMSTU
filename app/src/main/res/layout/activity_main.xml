@@ -5,4 +5,8 @@
     android:layout_height="match_parent"
     tools:context="ru.skafcats.hackathon2017.MainActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
 </RelativeLayout>
