@@ -1,9 +1,12 @@
 
 {
-	"buildFiles" : [ "/home/lionzxy/JavaProject/Hackathon2017/app/CMakeLists.txt" ],
+	"buildFiles" : 
+	[
+		"/Users/vasidmi/Desktop/AndroidProjects/HackathonBMSTU/app/CMakeLists.txt"
+	],
 	"cleanCommands" : 
 	[
-		"/home/lionzxy/Android/Sdk/cmake/3.6.3155560/bin/cmake --build /home/lionzxy/JavaProject/Hackathon2017/app/.externalNativeBuild/cmake/debug/x86_64 --target clean"
+		"/Users/vasidmi/Library/Android/sdk/cmake/3.6.3155560/bin/cmake --build /Users/vasidmi/Desktop/AndroidProjects/HackathonBMSTU/app/.externalNativeBuild/cmake/debug/x86_64 --target clean"
 	],
 	"cppFileExtensions" : [ "cpp" ],
 	"libraries" : 
@@ -12,27 +15,27 @@
 		{
 			"abi" : "x86_64",
 			"artifactName" : "native-lib",
-			"buildCommand" : "/home/lionzxy/Android/Sdk/cmake/3.6.3155560/bin/cmake --build /home/lionzxy/JavaProject/Hackathon2017/app/.externalNativeBuild/cmake/debug/x86_64 --target native-lib",
+			"buildCommand" : "/Users/vasidmi/Library/Android/sdk/cmake/3.6.3155560/bin/cmake --build /Users/vasidmi/Desktop/AndroidProjects/HackathonBMSTU/app/.externalNativeBuild/cmake/debug/x86_64 --target native-lib",
 			"buildType" : "debug",
 			"files" : 
 			[
 				
 				{
-					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=/home/lionzxy/Android/Sdk/ndk-bundle/toolchains/x86_64-4.9/prebuilt/linux-x86_64 --sysroot=/home/lionzxy/Android/Sdk/ndk-bundle/platforms/android-21/arch-x86_64  -Dnative_lib_EXPORTS -isystem /home/lionzxy/Android/Sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /home/lionzxy/Android/Sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/x86_64/include -isystem /home/lionzxy/Android/Sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -std=c++11 -O0 -fno-limit-debug-info -O0 -fno-limit-debug-info  -fPIC    -c ",
-					"src" : "/home/lionzxy/JavaProject/Hackathon2017/app/src/main/cpp/native-lib.cpp",
-					"workingDirectory" : "/home/lionzxy/JavaProject/Hackathon2017/app/.externalNativeBuild/cmake/debug/x86_64"
+					"flags" : "  --target=x86_64-none-linux-android --gcc-toolchain=/Users/vasidmi/Library/Android/sdk/ndk-bundle/toolchains/x86_64-4.9/prebuilt/darwin-x86_64 --sysroot=/Users/vasidmi/Library/Android/sdk/ndk-bundle/platforms/android-21/arch-x86_64  -Dnative_lib_EXPORTS -isystem /Users/vasidmi/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include -isystem /Users/vasidmi/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/x86_64/include -isystem /Users/vasidmi/Library/Android/sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/include/backward  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -Wa,--noexecstack -Wformat -Werror=format-security  -std=c++11 -O0 -fno-limit-debug-info -O0 -fno-limit-debug-info  -fPIC    -c ",
+					"src" : "/Users/vasidmi/Desktop/AndroidProjects/HackathonBMSTU/app/src/main/cpp/native-lib.cpp",
+					"workingDirectory" : "/Users/vasidmi/Desktop/AndroidProjects/HackathonBMSTU/app/.externalNativeBuild/cmake/debug/x86_64"
 				}
 			],
-			"output" : "/home/lionzxy/JavaProject/Hackathon2017/app/build/intermediates/cmake/debug/obj/x86_64/libnative-lib.so",
-			"toolchain" : "16359106413570987313"
+			"output" : "/Users/vasidmi/Desktop/AndroidProjects/HackathonBMSTU/app/build/intermediates/cmake/debug/obj/x86_64/libnative-lib.so",
+			"toolchain" : "346706704404412566"
 		}
 	},
 	"toolchains" : 
 	{
-		"16359106413570987313" : 
+		"346706704404412566" : 
 		{
-			"cCompilerExecutable" : "/home/lionzxy/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin/clang",
-			"cppCompilerExecutable" : "/home/lionzxy/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++"
+			"cCompilerExecutable" : "/Users/vasidmi/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang",
+			"cppCompilerExecutable" : "/Users/vasidmi/Library/Android/sdk/ndk-bundle/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
 		}
 	}
 }
