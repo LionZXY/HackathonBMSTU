@@ -28,7 +28,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="V"
                 android:textAlignment="center"
-                android:textSize="35sp" />
+                android:textSize="30sp" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/ItemTitle"

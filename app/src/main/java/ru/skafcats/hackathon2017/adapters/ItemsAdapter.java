@@ -50,7 +50,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        AppCompatTextView mItemIcon, mItemTitle, mItemDescription;
+        AppCompatTextView mItemTitle, mItemDescription, mItemIcon;
 
         public ViewHolder(View itemView) {
             super(itemView);
