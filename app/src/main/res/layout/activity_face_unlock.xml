@@ -22,12 +22,6 @@
             android:layout_height="fill_parent"
             />
 
-        <ru.skafcats.hackathon2017.face_unlock.FaceView
-            android:id="@+id/face_view"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            />
-
     </RelativeLayout>
 
     <Button

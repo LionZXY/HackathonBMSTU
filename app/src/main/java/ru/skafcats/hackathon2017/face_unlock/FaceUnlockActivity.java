@@ -15,20 +15,17 @@ import android.widget.Toast;
 import com.google.android.gms.vision.face.Face;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import ru.skafcats.hackathon2017.R;
 
 public class FaceUnlockActivity extends AppCompatActivity implements Camera.PictureCallback {
-    private FaceView debugFaceView;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_face_unlock);
 
         final Camera camera = getCameraInstance();
-
-        debugFaceView = (FaceView) findViewById(R.id.face_view);
 
         CameraPreview cameraPreview = new CameraPreview(this, camera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
@@ -60,8 +57,8 @@ public class FaceUnlockActivity extends AppCompatActivity implements Camera.Pict
         Bitmap photo = BitmapFactory.decodeByteArray(data, 0, data.length);
 
         FaceToByteTransformer faceToByteTransformer = new FaceToByteTransformer();
-        SparseArray<Face> faces = faceToByteTransformer.transform(photo, this);
-        debugFaceView.setContent(photo, faces);
-//        Toast.makeText(this, result.toString(), Toast.LENGTH_SHORT).show();
+        byte[] result = faceToByteTransformer.transform(photo, this);
+        // TODO: use it
+//        Toast.makeText(this, Arrays.toString(result), Toast.LENGTH_SHORT).show();
     }
 }
