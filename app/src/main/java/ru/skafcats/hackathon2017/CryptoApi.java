@@ -14,6 +14,7 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 import ru.skafcats.hackathon2017.enums.Constants;
+import ru.skafcats.hackathon2017.exceptions.InvalidPasswordException;
 import ru.skafcats.hackathon2017.helpers.TaskHelper;
 import ru.skafcats.hackathon2017.interfaces.ITask;
 import ru.skafcats.hackathon2017.interfaces.ITaskAnswerListener;
@@ -48,6 +49,7 @@ public class CryptoApi implements ITaskAnswerListener {
     }
 
     public static CryptoApi getInstance(Context context, String password) {
+        //new MySecureSharedPreference()
         return new CryptoApi(context, password);
     }
 
