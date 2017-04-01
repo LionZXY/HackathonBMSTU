@@ -137,6 +137,20 @@
         android:text="9"
         android:textSize="45sp" />
 
+
+    <android.support.v7.widget.AppCompatImageButton
+        android:id="@+id/complete_pin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/num0"
+        android:layout_alignLeft="@id/num9"
+        android:layout_alignRight="@id/num9"
+        android:layout_alignTop="@id/num0"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:src="@mipmap/check_symbol"
+        android:textSize="45sp" />
+
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/pin_edit"
         android:layout_width="wrap_content"
@@ -151,6 +165,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/pin_edit"
+        android:layout_alignTop="@+id/pin_edit"
         android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/pin_edit"
         android:src="@mipmap/ic_backspace_black_24dp" />
