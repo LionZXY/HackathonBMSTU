@@ -9,6 +9,7 @@ import com.securepreferences.SecurePreferences;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -34,6 +35,7 @@ import ru.skafcats.crypto.tasks.SyncTask;
 
 public class CryptoApi implements ITaskAnswerListener {
     public static final String TAG = "CryptoApi";
+    private static final String PASSWORD_CHECK_STRING = "ckXIjZb06c07hCzAJu9Y";
     private Context context = null;
     private Realm realm = null;
     private String password = null;
@@ -45,6 +47,10 @@ public class CryptoApi implements ITaskAnswerListener {
         realm = Realm.getInstance(new RealmConfiguration.Builder().schemaVersion(1).deleteRealmIfMigrationNeeded().name(Constants.BASE_NAME).build());
         this.password = password;
         this.packageName = context.getPackageName();
+    }
+
+    public static void setMasterPassword(Context context, String password){
+        new MySecureSharedPreference(context, password, 0).edit().putString("auth", PASSWORD_CHECK_STRING).apply();
     }
 
     public static CryptoApi getInstance(Context context, String password) {
@@ -207,5 +213,9 @@ public class CryptoApi implements ITaskAnswerListener {
                 }
             }
         }
+    }
+
+    public boolean checkPassword() {
+        return new MySecureSharedPreference(context, password, 0).getString("auth", "").equals(PASSWORD_CHECK_STRING);
     }
 }
