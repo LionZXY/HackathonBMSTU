@@ -16,6 +16,7 @@ public class Constants {
     public static final String KEY_RESULT_CODE = "resultCode";
     public static final String KEY_RESPONSE = "response";
     public static final String KEY_TASK = "tasks";
+    public static final int REQUEST_CODE_SECURE = 1;
 
     public static final int ID_TASK_SYNC = 2;
     public static final int ID_REGISTER = 3;

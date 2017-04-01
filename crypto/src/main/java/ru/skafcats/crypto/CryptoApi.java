@@ -94,6 +94,21 @@ public class CryptoApi implements ITaskAnswerListener {
         return getToken() != null;
     }
 
+    public void updateElement(SecureInfo secureInfo) {
+        new MySecureSharedPreference(context, password, secureInfo).setSecureInfo(secureInfo);
+        realm.beginTransaction();
+
+        RealmResults<InfoAboutSecureInfo> results = realm.where(InfoAboutSecureInfo.class).equalTo("id", secureInfo.getId()).findAll();
+        if (results != null && results.size() != 0) {
+            results.get(0).setInfo(new InfoAboutSecureInfo(secureInfo));
+        } else {
+            InfoAboutSecureInfo infoAboutSecureInfo = realm.createObject(InfoAboutSecureInfo.class, secureInfo.getId());
+            infoAboutSecureInfo.setSecureInfo(secureInfo);
+        }
+
+        realm.commitTransaction();
+    }
+
     public void sync() {
         ArrayList<InfoAboutSecureInfo> infos = new ArrayList<>();
         for (InfoAboutSecureInfo info : getInfo())

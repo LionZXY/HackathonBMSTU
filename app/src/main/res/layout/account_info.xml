@@ -75,7 +75,11 @@
             android:layout_height="75dp"
             android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
 
-
+        <Button
+            android:id="@+id/save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Сохранить и выйти"/>
     </LinearLayout>
 
 

@@ -27,6 +27,7 @@ import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 import java.io.File;
 
 import biz.borealis.numberpicker.NumberPicker;
+import ru.skafcats.crypto.enums.Constants;
 import ru.skafcats.crypto.helpers.TaskHelper;
 import ru.skafcats.crypto.interfaces.ITaskAnswerListener;
 import ru.skafcats.crypto.models.SecureInfo;
@@ -160,6 +161,8 @@ public class SecureInfoActivity extends Activity {
         adapter = new AttachmentAdapter(this, this, info);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);
+
+
     }
 
     @Override
@@ -194,5 +197,13 @@ public class SecureInfoActivity extends Activity {
             }
 
         }
+    }
+
+    @Override
+    public void finish() {
+        Intent intent = new Intent();
+        intent.putExtra(Constants.KEY_RESPONSE, info);
+        setResult(Constants.REQUEST_CODE_SECURE, intent);
+        super.finish();
     }
 }
