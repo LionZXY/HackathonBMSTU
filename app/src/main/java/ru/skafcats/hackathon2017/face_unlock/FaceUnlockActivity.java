@@ -1,5 +1,7 @@
 package ru.skafcats.hackathon2017.face_unlock;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -57,8 +59,11 @@ public class FaceUnlockActivity extends AppCompatActivity implements Camera.Pict
         Bitmap photo = BitmapFactory.decodeByteArray(data, 0, data.length);
 
         FaceToByteTransformer faceToByteTransformer = new FaceToByteTransformer();
-        byte[] result = faceToByteTransformer.transform(photo, this);
-        // TODO: use it
-//        Toast.makeText(this, Arrays.toString(result), Toast.LENGTH_SHORT).show();
+        int code = faceToByteTransformer.transformToInt(photo, this);
+
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("code", code);
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
     }
 }

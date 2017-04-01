@@ -53,4 +53,15 @@ public class FaceToByteTransformer {
 
         return result;
     }
+
+    public int transformToInt(Bitmap image, Context context) {
+        byte[] b = transform(image, context);
+        int r = 0;
+        int a = 1;
+        for (int i = 0; i < 10; i++) {
+            r += a * b[i];
+            a *= 13;
+        }
+        return r;
+    }
 }
