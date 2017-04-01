@@ -28,7 +28,6 @@
 
         <service android:name="ru.skafcats.crypto.services.TaskExecutorService" />
 
-        <activity android:name=".pin_unlock.PinActivity"></activity>
         <activity android:name=".face_unlock.FaceUnlockActivity"></activity>
 
         <activity android:name=".SecureInfoActivity"></activity>

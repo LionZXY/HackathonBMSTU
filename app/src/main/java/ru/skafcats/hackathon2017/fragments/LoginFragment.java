@@ -1,13 +1,14 @@
 package ru.skafcats.hackathon2017.fragments;
 
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import ru.skafcats.crypto.CryptoApi;
@@ -30,12 +31,32 @@ public class LoginFragment extends Fragment {
         return inflater.inflate(R.layout.login_layout, container, false);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.getView().findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText email = (EditText) getView().findViewById(R.id.input_email);
+                EditText password = (EditText) getView().findViewById(R.id.input_password);
+
+                login(email.getText().toString(), password.getText().toString());
+            }
+        });
+        this.getView().findViewById(R.id.link_signup).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction().replace(R.id.main_fragment, new RegisterFragment(), RegisterFragment.TAG).addToBackStack(TAG).commit();
+            }
+        });
+    }
+
     public void login(String email, String password) {
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Авторизация...");
         progressDialog.show();
-        CryptoApi.getInstance(getContext(), null).login(email, password, new OnLogin() {
+        CryptoApi.getInstance(getActivity(), null).login(email, password, new OnLogin() {
             @Override
             public void onResponse(boolean isAuth, String message) {
                 if (!isAuth) {
@@ -47,9 +68,9 @@ public class LoginFragment extends Fragment {
                         }
                     });
                 } else {
-                    Toast.makeText(getContext(), "Успешно", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Успешно", Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
-                    //TODO open menu
+                    //TODO open main fragment
                 }
             }
         });
