@@ -20,18 +20,18 @@ public class MainActivity extends AppCompatActivity implements ITaskAnswerListen
     FragmentManager mFragmentManager;
 
 
-    private int pinCode;
-    private int photoCode;
+    private long pinCode;
+    private long photoCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent photoIntent = new Intent(this, FaceUnlockActivity.class);
-        startActivityForResult(photoIntent, 2);
-
         Intent pinIntent = new Intent(this, PinActivity.class);
         startActivityForResult(pinIntent, 1);
+
+        Intent photoIntent = new Intent(this, FaceUnlockActivity.class);
+        startActivityForResult(photoIntent, 2);
     }
 
     @Override
@@ -45,11 +45,13 @@ public class MainActivity extends AppCompatActivity implements ITaskAnswerListen
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case 1:
-                pinCode = data.getIntExtra("code", 0);
+                pinCode = data.getLongExtra("code", 0);
+                Log.i("Hack2017", "pinCode: " + pinCode);
                 break;
 
             case 2:
-                photoCode = data.getIntExtra("code", 0);
+                photoCode = data.getLongExtra("code", 0);
+                Log.i("Hack2017", "photoCode: " + photoCode);
 
 //                CryptoApi cryptoApi = CryptoApi.getInstance(this, "" + getCode());
                 // TODO
@@ -57,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements ITaskAnswerListen
                 //cryptoApi.addInfo(new SecureInfo("test2"));
 //                cryptoApi.login("nikita@kulikof.ru", password, null);
 //                cryptoApi.sync();
+
+                Log.i("Hack2017", "code: " + getCode());
 
                 Intent intent = new Intent(this, SecureInfoActivity.class);
                 startActivity(intent);
@@ -66,6 +70,6 @@ public class MainActivity extends AppCompatActivity implements ITaskAnswerListen
     }
 
     private long getCode() {
-        return (long) photoCode << 16 + pinCode;
+        return photoCode << 16 + pinCode;
     }
 }
