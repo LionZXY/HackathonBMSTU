@@ -22,8 +22,9 @@ public class MainActivity extends AppCompatActivity implements ITaskAnswerListen
         setContentView(R.layout.activity_main);
 
         CryptoApi cryptoApi = CryptoApi.getInstance(this, "1234");
-        cryptoApi.addInfo(new SecureInfo("test"));
-        Log.i("Test", String.valueOf(cryptoApi.getInfo().get(0).getName()));
+        //cryptoApi.addInfo(new SecureInfo("test2"));
+        cryptoApi.login("nikita@kulikof.ru", password, null);
+        //cryptoApi.sync();
     }
 
     @Override

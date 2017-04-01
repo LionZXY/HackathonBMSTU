@@ -5,6 +5,7 @@ import android.util.Log;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import ru.skafcats.hackathon2017.enums.Constants;
 import ru.skafcats.hackathon2017.interfaces.IExecutor;
 import ru.skafcats.hackathon2017.interfaces.ITask;
 
@@ -16,7 +17,6 @@ public class ThreadTask extends Thread {
     public static final String TAG = "ThreadTask";
     private MultiResultReciever resultReceiver = null;
     private final CopyOnWriteArrayList<ITask> tasks = new CopyOnWriteArrayList<>();
-    private volatile boolean isRun = false;
 
     ThreadTask(MultiResultReciever resultReceiver) {
         this.resultReceiver = resultReceiver;
@@ -25,7 +25,6 @@ public class ThreadTask extends Thread {
     @Override
     public void run() {
         super.run();
-        isRun = true;
         ITask task = null;
 
         while (tasks.size() > 0 && !isInterrupted()) {
@@ -36,13 +35,27 @@ public class ThreadTask extends Thread {
             task.runInBackground(new IExecutor() {
                 @Override
                 public void onProgressNotify(int resultCode, Bundle data) {
-                    data.putParcelable("task", finalTask);
+                    if (data == null)
+                        data = new Bundle();
+                    data.putParcelable(Constants.KEY_TASK, finalTask);
                     resultReceiver.send(resultCode, data);
                 }
             });
         }
-        isRun = false;
-        tasks.clear();
+        if (!isInterrupted())
+            try {
+                synchronized (tasks) {
+                    tasks.wait();
+                }
+                if (!isInterrupted())
+                    run();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        synchronized (tasks) {
+            tasks.clear();
+        }
+
     }
 
     public void addTask(ITask task) {
@@ -53,8 +66,7 @@ public class ThreadTask extends Thread {
                     tasks.remove(task);
                     tasks.add(task);
                 } else tasks.add(task);
-                if (!isRun && !isAlive())
-                    start();
+                tasks.notifyAll();
             }
         }
     }

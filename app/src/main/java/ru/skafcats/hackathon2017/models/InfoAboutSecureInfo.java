@@ -3,12 +3,14 @@ package ru.skafcats.hackathon2017.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.File;
 import java.io.Serializable;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import ru.skafcats.hackathon2017.enums.InfoType;
 import ru.skafcats.hackathon2017.enums.RealmEnum;
+import ru.skafcats.hackathon2017.storage.MySecureSharedPreference;
 
 /**
  * Created by Nikita Kulikov on 31.03.17.
@@ -22,7 +24,6 @@ public class InfoAboutSecureInfo extends RealmObject implements Serializable, Pa
     private long lastEdit = -1;
     private String name = null;
     private String login = null;
-    private RealmEnum type = new RealmEnum().saveEnum(InfoType.UNKNOWN);
     private String link = null;
 
     public InfoAboutSecureInfo(SecureInfo secureInfo) {
@@ -30,8 +31,6 @@ public class InfoAboutSecureInfo extends RealmObject implements Serializable, Pa
         setName(secureInfo.getName());
         setLogin(secureInfo.getName());
         setLastEdit(getId());
-        if (secureInfo.getByKey("type") != null)
-            setType(new RealmEnum().saveEnum(InfoType.getKeyFromId(Integer.parseInt(secureInfo.getByKey("type")))));
         setLink(secureInfo.getByKey("link"));
     }
 
@@ -46,8 +45,6 @@ public class InfoAboutSecureInfo extends RealmObject implements Serializable, Pa
         setName(secureInfo.getName());
         setLogin(secureInfo.getByKey("login"));
         setLastEdit(getId());
-        if (secureInfo.getByKey("type") != null)
-            setType(new RealmEnum().saveEnum(InfoType.getKeyFromId(Integer.parseInt(secureInfo.getByKey("type")))));
         setLink(secureInfo.getByKey("link"));
         return this;
     }
@@ -56,7 +53,6 @@ public class InfoAboutSecureInfo extends RealmObject implements Serializable, Pa
         setName(info.getName());
         setLogin(info.getLogin());
         setLastEdit(info.getLastEdit());
-        setType(info.getType());
         setLink(info.getLink());
         return this;
     }
@@ -98,14 +94,6 @@ public class InfoAboutSecureInfo extends RealmObject implements Serializable, Pa
         this.login = login;
     }
 
-    public RealmEnum getType() {
-        return type;
-    }
-
-    public void setType(RealmEnum realmEnum) {
-        this.type = realmEnum;
-    }
-
     @Override
     public int describeContents() {
         return 0;
@@ -115,7 +103,6 @@ public class InfoAboutSecureInfo extends RealmObject implements Serializable, Pa
         id = in.readLong();
         name = in.readString();
         login = in.readString();
-        type = new RealmEnum().saveEnum(InfoType.getKeyFromId(in.readInt()));
         Serializable tmp = in.readSerializable();
     }
 
@@ -124,7 +111,6 @@ public class InfoAboutSecureInfo extends RealmObject implements Serializable, Pa
         dest.writeLong(id);
         dest.writeString(name);
         dest.writeString(login);
-        dest.writeInt(type.getEnum().getId());
     }
 
     public long getLastEdit() {
@@ -141,5 +127,14 @@ public class InfoAboutSecureInfo extends RealmObject implements Serializable, Pa
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public InfoAboutSecureInfo copy() {
+        InfoAboutSecureInfo toReturn = new InfoAboutSecureInfo(getId());
+        return toReturn.setInfo(this);
+    }
+
+    public File getFile(String packageName) {
+        return MySecureSharedPreference.getFile(this, packageName);
     }
 }

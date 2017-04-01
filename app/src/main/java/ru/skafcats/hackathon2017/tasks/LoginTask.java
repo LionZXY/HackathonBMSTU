@@ -5,8 +5,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
-import java.io.IOException;
-
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -24,7 +22,7 @@ import ru.skafcats.hackathon2017.services.MultiResultReciever;
  * Возможно полное или частичное копирование
  */
 
-public class LoginTask extends ITask{
+public class LoginTask extends ITask {
     public static final String TAG = "RegisterTask";
     private String email;
     private String password;
@@ -53,12 +51,13 @@ public class LoginTask extends ITask{
         RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("email", email).addFormDataPart("password", password).build();
 
-        Request request = new Request.Builder().url(Constants.API_URL + "/auth/signup/").method("POST", RequestBody.create(null, new byte[0]))
+        Request request = new Request.Builder().url(Constants.API_URL + "/auth/login").method("POST", RequestBody.create(null, new byte[0]))
                 .post(requestBody).build();
         try {
             Response response = client.newCall(request).execute();
-            bundle.putString(Constants.KEY_RESPONSE, response.body().toString());
-        } catch (IOException e) {
+            bundle.putString(Constants.KEY_RESPONSE, response.body().string());
+            executor.onProgressNotify(MultiResultReciever.CODE_RESULT_FINISH_TASK, bundle);
+        } catch (Exception e) {
             Log.e(TAG, "Error while send request", e);
             executor.onProgressNotify(MultiResultReciever.CODE_RESULT_ERROR_TASK, bundle);
         }

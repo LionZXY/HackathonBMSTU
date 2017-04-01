@@ -3,6 +3,7 @@ package ru.skafcats.hackathon2017.storage;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.util.ArraySet;
+import android.util.Log;
 
 import com.securepreferences.SecurePreferences;
 
@@ -30,6 +31,7 @@ public class MySecureSharedPreference extends SecurePreferences {
         super(context, password, String.valueOf(id));
 
         prefFile = new File("/data/data/" + context.getPackageName() + "/shared_prefs/" + id + ".xml");
+        Log.i("Test", prefFile.getAbsolutePath());
     }
 
     public MySecureSharedPreference(Context context, String password, InfoAboutSecureInfo infoAboutSecureInfo) {

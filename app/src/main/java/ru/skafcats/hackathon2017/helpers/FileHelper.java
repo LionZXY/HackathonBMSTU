@@ -8,8 +8,16 @@ import android.util.Log;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 import ru.skafcats.hackathon2017.enums.Constants;
+import ru.skafcats.hackathon2017.models.InfoAboutSecureInfo;
 
 /**
  * Created by Nikita Kulikov on 31.03.17.
@@ -87,5 +95,33 @@ public class FileHelper {
 
     public static boolean isImage(File file) {
         return getNameByFile(file).matches(Constants.REGEXP_IMAGE_NAME);
+    }
+
+    public static void download(InfoAboutSecureInfo info, String packageName, String token) throws Exception {
+        File output = info.getFile(packageName);
+        OkHttpClient client = new OkHttpClient();
+        RequestBody requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM).
+                addFormDataPart("token", token).
+                addFormDataPart("path", FileHelper.getNameByFile(info.getFile(packageName))).build();
+        Request request = new Request.Builder().method("POST", RequestBody.create(null, new byte[0]))
+                .post(requestBody)
+                .url(Constants.API_URL + "/storage/get")
+                .build();
+        Response response = client.newCall(request).execute();
+
+        InputStream in = response.body().byteStream();
+        output.getParentFile().mkdirs();
+        output.createNewFile();
+        FileOutputStream fos = new FileOutputStream(output);
+        int result = 0;
+        byte[] buffer = new byte[4096];
+
+        while ((result = in.read(buffer)) != -1) {
+            fos.write(buffer, 0, result);
+        }
+        fos.close();
+        in.close();
+        response.body().close();
+        Log.i(TAG, "Download file is " + output.exists() + " " + output.getAbsolutePath());
     }
 }

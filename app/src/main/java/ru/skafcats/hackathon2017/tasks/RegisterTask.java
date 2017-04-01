@@ -56,7 +56,10 @@ public class RegisterTask extends ITask {
                 .post(requestBody).build();
         try {
             Response response = client.newCall(request).execute();
-            bundle.putString(Constants.KEY_RESPONSE, response.body().toString());
+            String resp = response.body().string();
+            //Log.i("Test", response.message());
+            bundle.putString(Constants.KEY_RESPONSE, resp);
+            executor.onProgressNotify(MultiResultReciever.CODE_RESULT_FINISH_TASK, bundle);
         } catch (IOException e) {
             Log.e(TAG, "Error while send request", e);
             executor.onProgressNotify(MultiResultReciever.CODE_RESULT_ERROR_TASK, bundle);

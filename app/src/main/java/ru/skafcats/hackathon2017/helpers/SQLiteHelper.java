@@ -58,7 +58,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             values.put(INFO_ABOUT_INFO.SERVICE_COLUMN, infoAboutSecureInfo.getLink());
         if (infoAboutSecureInfo.getName() != null)
             values.put(INFO_ABOUT_INFO.NAME_COLUMN, infoAboutSecureInfo.getName());
-        values.put(INFO_ABOUT_INFO.TYPE_COLUMN, infoAboutSecureInfo.getType().getEnum().getId());
 
         SQLiteDatabase database = getWritableDatabase();
         database.insert(INFO_ABOUT_INFO_TABLE, null, values);
@@ -79,7 +78,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 infoAboutSecureInfo.setLastEdit(cursor.getLong(cursor.getColumnIndex(INFO_ABOUT_INFO.LAST_EDIT_COLUMN)));
                 infoAboutSecureInfo.setName(cursor.getString(cursor.getColumnIndex(INFO_ABOUT_INFO.NAME_COLUMN)));
                 infoAboutSecureInfo.setLogin(cursor.getString(cursor.getColumnIndex(INFO_ABOUT_INFO.LOGIN_COLUMN)));
-                infoAboutSecureInfo.setType(new RealmEnum().saveEnum(InfoType.getKeyFromId(cursor.getInt(cursor.getColumnIndex(INFO_ABOUT_INFO.TYPE_COLUMN)))));
                 infoAboutSecureInfo.setLink(cursor.getString(cursor.getColumnIndex(INFO_ABOUT_INFO.SERVICE_COLUMN)));
                 toExit.add(infoAboutSecureInfo);
             } catch (Exception e) {

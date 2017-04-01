@@ -32,7 +32,7 @@ public class MultiResultReciever extends ResultReceiver {
     @Override
     protected void onReceiveResult(int resultCode, Bundle resultData) {
         if (resultData != null) {
-            ITask task = resultData.getParcelable("task");
+            ITask task = resultData.getParcelable(Constants.KEY_TASK);
             resultData.putInt(Constants.KEY_RESULT_CODE, resultCode);
             if (task != null) {
                 List<ITaskAnswerListener> taskAnswerListeners = taskListeners.get(task);
