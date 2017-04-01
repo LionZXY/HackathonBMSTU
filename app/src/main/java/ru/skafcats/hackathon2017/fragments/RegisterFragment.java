@@ -3,6 +3,7 @@ package ru.skafcats.hackathon2017.fragments;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import ru.skafcats.crypto.CryptoApi;
 import ru.skafcats.crypto.interfaces.OnLogin;
+import ru.skafcats.hackathon2017.MainActivity;
 import ru.skafcats.hackathon2017.R;
 
 /**
@@ -49,11 +51,11 @@ public class RegisterFragment extends Fragment {
     }
 
     public void register(String email, String password) {
-        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Авторизация...");
         progressDialog.show();
-        CryptoApi.getInstance(getContext(), null).register(email, password, new OnLogin() {
+        CryptoApi.getInstance(getActivity(), null).register(email, password, new OnLogin() {
             @Override
             public void onResponse(boolean isAuth, String message) {
                 if (!isAuth) {
@@ -65,9 +67,11 @@ public class RegisterFragment extends Fragment {
                         }
                     });
                 } else {
-                    Toast.makeText(getContext(), "Успешно", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Успешно", Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
-                    //TODO open main fragment
+                    startActivity(new Intent(getActivity(), MainActivity.class));
+
+                    //getFragmentManager().beginTransaction().replace(R.id.main_fragment, new PasswordListFragment(), PasswordListFragment.TAG).addToBackStack(null).commit();
                 }
             }
         });

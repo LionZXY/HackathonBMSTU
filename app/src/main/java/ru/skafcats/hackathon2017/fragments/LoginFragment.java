@@ -3,6 +3,7 @@ package ru.skafcats.hackathon2017.fragments;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import ru.skafcats.crypto.CryptoApi;
 import ru.skafcats.crypto.interfaces.OnLogin;
+import ru.skafcats.hackathon2017.MainActivity;
 import ru.skafcats.hackathon2017.R;
 
 /**
@@ -70,7 +72,8 @@ public class LoginFragment extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), "Успешно", Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
-                    //TODO open main fragment
+                    startActivity(new Intent(getActivity(), MainActivity.class));
+                    //getFragmentManager().beginTransaction().replace(R.id.main_fragment, new PasswordListFragment(), PasswordListFragment.TAG).addToBackStack(null).commit();
                 }
             }
         });

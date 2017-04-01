@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import ru.skafcats.crypto.CryptoApi;
 import ru.skafcats.hackathon2017.R;
+import ru.skafcats.hackathon2017.interfaces.ICodeReturner;
 
 /**
  * Created by Nikita Kulikov on 01.04.17.
@@ -22,6 +23,8 @@ import ru.skafcats.hackathon2017.R;
 
 public class PinFragment extends Fragment {
     public static final String TAG = "pin";
+    public ICodeReturner codeReturner = null;
+    private CryptoApi api = null;
 
     @Nullable
     @Override
@@ -62,11 +65,20 @@ public class PinFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    getFragmentManager().beginTransaction().replace(R.id.main_fragment, new LoginFragment(), LoginFragment.TAG).commit();
                     CryptoApi.setMasterPassword(getActivity(), pinEdit.getText().toString());
+                    if (codeReturner == null)
+                        getFragmentManager().beginTransaction().replace(R.id.main_fragment, new LoginFragment(), LoginFragment.TAG).commit();
+                    else {
+                        codeReturner.onCodeReturn(pinEdit.getText().toString());
+                    }
                 } catch (Exception e) {
                 }
             }
         });
+    }
+
+    public PinFragment subscribeToPin(ICodeReturner codeReturner) {
+        this.codeReturner = codeReturner;
+        return this;
     }
 }
