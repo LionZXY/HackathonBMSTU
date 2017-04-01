@@ -5,7 +5,6 @@
     android:layout_height="match_parent">
 
 
-
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/num0"
         android:layout_width="wrap_content"
@@ -136,22 +135,23 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:clickable="true"
         android:text="9"
-        android:textSize="45sp"
-        />
+        android:textSize="45sp" />
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/pin_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/num2"
+        android:layout_above="@+id/num2"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="40dp" />
+        android:layout_marginBottom="41dp"
+        android:minWidth="80dp"
+        android:textAlignment="center" />
 
     <android.support.v7.widget.AppCompatImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/pin_edit"
-        android:layout_toEndOf="@+id/pin_edit"
+        android:layout_marginLeft="10dp"
         android:layout_toRightOf="@+id/pin_edit"
         android:src="@mipmap/ic_backspace_black_24dp" />
 
