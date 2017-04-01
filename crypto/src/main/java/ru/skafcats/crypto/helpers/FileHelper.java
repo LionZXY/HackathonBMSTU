@@ -97,6 +97,10 @@ public class FileHelper {
         return getNameByFile(file).matches(Constants.REGEXP_IMAGE_NAME);
     }
 
+    public static boolean isImage(String filename) {
+        return filename != null && filename.matches(Constants.REGEXP_IMAGE_NAME);
+    }
+
     public static void download(InfoAboutSecureInfo info, String packageName, String token) throws Exception {
         File output = info.getFile(packageName);
         OkHttpClient client = new OkHttpClient();

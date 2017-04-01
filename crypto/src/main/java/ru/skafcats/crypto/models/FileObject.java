@@ -1,5 +1,7 @@
 package ru.skafcats.crypto.models;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -62,6 +64,19 @@ public class FileObject implements Serializable, Parcelable {
         dest.writeString(data);
     }
 
+    public Bitmap getImage() {
+        if (!isImage())
+            return null;
+        if (file != null)
+            return BitmapFactory.decodeFile(file.getAbsolutePath());
+        else if (data != null)
+            return FileHelper.decodeBase64(data);
+        else return null;
+    }
+
+    public boolean isImage() {
+        return FileHelper.isImage(name);
+    }
 
     public String toString() {
         String toReturn = StringHelper.getStringWithSize(name, Constants.MAX_SIZE);

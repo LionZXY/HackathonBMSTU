@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Hackathon2017</string>
     <string name="action_settings">Settings</string>
+    
+    <string-array name="password_choise">
+        <item>Редактировать</item>
+        <item>Копировать</item>
+        <item>Копировать с самоуничтожением</item>
+    </string-array>
 </resources>

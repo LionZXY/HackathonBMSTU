@@ -6,6 +6,5 @@ package ru.skafcats.crypto.enums;
 
 public enum TaskType {
     NETWORK_TASK,
-    DATABASE_TASK,
-    LOCAL_NETWORK;
+    PROCCESS_TASK;
 }

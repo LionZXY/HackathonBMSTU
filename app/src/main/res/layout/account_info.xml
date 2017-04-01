@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tittle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/oneSymbol"
+            android:text="Vkontakte"
+            android:textAlignment="center"
+            android:textSize="40sp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/oneSymbol"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:text="V"
+            android:textAlignment="center"
+            android:textSize="37dp" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edit_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Login" />
+
+        <RelativeLayout
+            android:id="@+id/password_row"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="40sp"
+                android:inputType="textPassword"
+                android:textStyle="bold"
+                android:text="......."
+                android:maxLines="1"/>
+
+            <ImageView
+                android:id="@+id/editText_password_visible"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_visibility_black_24dp" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/attachment_list"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:orientation="horizontal"></android.support.v7.widget.RecyclerView>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -29,10 +29,19 @@ android {
         }
     }
 }
+repositories {
+    maven {
+        url  "http://dl.bintray.com/lukaville/maven"
+    }
+}
+
 
 dependencies {
+    compile 'biz.borealis.numberpicker:NumberPicker:1.0.1'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
     compile 'com.scottyab:secure-preferences-lib:0.1.4'
     compile 'com.google.android.gms:play-services-vision:10.2.1'
+    compile 'com.nbsp:library:1.2'
     compile project(":crypto")
 
 
