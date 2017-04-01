@@ -43,8 +43,8 @@ public class FaceToByteTransformer {
         for (Landmark landmark : face.getLandmarks().subList(0, 5)) {
             float x = landmark.getPosition().x / image.getWidth();
             float y = landmark.getPosition().y / image.getHeight();
-            byte a = (byte) (x * 100 / 8);
-            byte b = (byte) (y * 100 / 8);
+            byte a = (byte) (x * 100 / 32);
+            byte b = (byte) (y * 100 / 32);
             result[i] = a;
             i++;
             result[i] = b;
@@ -60,7 +60,7 @@ public class FaceToByteTransformer {
         int a = 1;
         for (int i = 0; i < 10; i++) {
             r += a * b[i];
-            a *= 13;
+            a *= 7;
         }
         return r;
     }
