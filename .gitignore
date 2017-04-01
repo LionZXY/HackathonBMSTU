@@ -44,3 +44,6 @@ app/src/test/
 crypto/libs/
 crypto/src/main/res/drawable/
 cryptolibrary/
+
+.idea
+app/.externalNativeBuild
